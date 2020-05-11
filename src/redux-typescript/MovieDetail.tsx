@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Overdrive from 'react-overdrive';
+// import Overdrive from 'react-overdrive';
 import { connect } from 'react-redux';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
@@ -16,7 +16,6 @@ class MovieDetail extends Component<ReturnType<typeof mapStateToProps> & ReturnT
         const { getMovie } = this.props;
 
         getMovie(match.params.id);
-        //this.props.getMovie(match.params.id);
     }
 
     public componentWillUnmount() {
@@ -34,9 +33,9 @@ class MovieDetail extends Component<ReturnType<typeof mapStateToProps> & ReturnT
         return (
             <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
                 <MovieInfo>
-                    <Overdrive id={`${movie.id}`}>
+                    <div id={`${movie.id}`}>
                         <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
-                    </Overdrive>
+                    </div>
                     <div>
                         {movie.title ? <h1>Hello</h1> : <h1>Hi</h1>}
                         <h1>{movie.title}</h1>

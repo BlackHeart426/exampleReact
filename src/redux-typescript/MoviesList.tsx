@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
 import { AppState } from './rootReducer';
 import { getMovies } from './actions';
 import Movie from './Movie';
 import { IMovie } from './reducer';
+import styled from "styled-components";
 
 class MoviesList extends PureComponent<ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>, {}> {
     public componentDidMount() {
