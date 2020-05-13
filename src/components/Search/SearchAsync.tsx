@@ -73,7 +73,7 @@ export default function AsynchronousSearch(props: IProps) {
             getOptionSelected={(option: any, value: any) => option.data.title === value.data.title}
             getOptionLabel={(option: any) => option.data.title + ' - ' + option.data.artist}
             options={options}
-            onChange={(event: any, value: string) => handleChange(value)}
+            onChange={(value: any) => handleChange(value)}
             loading={loading}
             renderInput={(params: any) => (
                 <TextField
