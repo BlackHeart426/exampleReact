@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { AuthorizationModal } from './components/Authorization/AuthorizationModal';
+import {Card} from "react-bootstrap";
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <AuthorizationModal register={true}/>
         <a
           className="App-link"
           href="https://reactjs.org"

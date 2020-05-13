@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@iconify/icons-flat-color-icons": "latest",
+    "@iconify/react": "latest",
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "latest",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -12,7 +17,9 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.8",
     "@types/styled-components": "^5.1.0",
+    "bootstrap": "^4.5.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-overdrive": "latest",
     "react-redux": "latest",
@@ -21,10 +28,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "latest",
-    "typescript": "^3.7.5",
-    "@material-ui/core": "latest",
-    "@material-ui/icons": "latest",
-    "@material-ui/lab": "latest"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",

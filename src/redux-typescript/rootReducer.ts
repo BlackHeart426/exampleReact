@@ -6,7 +6,6 @@ export enum EReduxActionTypes {
     GET_MOVIE = 'GET_MOVIE',
     GET_MOVIES = 'GET_MOVIES',
     RESET_MOVIE = 'RESET_MOVIE',
-    TOGGLE_MESSAGE = 'TOGGLE_MESSAGE'
 }
 
 export interface IReduxBaseAction {
@@ -14,7 +13,6 @@ export interface IReduxBaseAction {
 }
 
 const rootReducer = combineReducers({
-    toggle,
     movies
 });
 
