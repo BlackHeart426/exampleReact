@@ -18,8 +18,8 @@ interface IProps {
 }
 
 export default function AsynchronousSearch(props: IProps) {
-    const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState([]);
+    const [open, setOpen] = React.useState<boolean>(false);
+    const [options, setOptions] = React.useState<any>([]);
     const loading = open && options.length === 0;
     const {onSearch} = props;
 
