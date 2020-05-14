@@ -1,36 +1,44 @@
 import React from "react";
-import {Grid} from "@material-ui/core";
 import {GoogleButtonLogin} from "../Buttons/Auth/GoogleButtonLogin";
+import {Container, Row} from "react-bootstrap";
 
 export function AuthorizationLeftSide(props: any) {
     return (
-        <>
-            <Grid container spacing={3}>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-                <Grid item xs={3}>
-                    <GoogleButtonLogin />
-                </Grid>
-            </Grid>
-        </>
+        <Container>
+            <div style={{paddingTop: 20}}>
+                <Row>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+
+
+                </Row>
+            </div>
+            <div style={{paddingTop: 20}}>
+                <Row>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                    <div style={{paddingRight: 15, paddingLeft: 15}}>
+                        <GoogleButtonLogin />
+                    </div>
+                </Row>
+            </div>
+        </Container>
     )
 }

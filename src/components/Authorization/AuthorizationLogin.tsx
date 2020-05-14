@@ -1,51 +1,45 @@
 import React, {useEffect, useState} from "react";
-import TextField from "@material-ui/core/TextField";
 import {validateForm} from "../../components/validateForm/validateForm";
-import {Checkbox, Typography, FormControlLabel} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 // import {authorizationActionCreator, authorizationGoogleActionCreator} from "../../store/action/authorization";
 import {connect} from "react-redux";
+import {Form, Button, Container, Col, Row} from "react-bootstrap";
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-            action: {
-                marginTop: '10px',
-            },
-            contentText: {
-                marginTop: '8px'
-            }
-
-        }
-    )
-)
+export interface IState {
+    email: {
+        status: boolean,
+        message: string,
+        value: string
+    },
+    password: {
+        status: boolean,
+        message: string,
+        value: string
+    },
+}
 
 export function AuthorizationLogin(props: any) {
-    const classes = useStyles()
     const {onChangeForm, onHideModal} = props;
 
-    const initialState = {
+    const initialState: IState = {
         email: {
             status: false,
-            message: ''
+            message: '',
+            value: ''
         },
         password: {
             status: false,
-            message: ''
+            message: '',
+            value: ''
         },
     }
 
-    const [email, setEmail] = useState('valepa009@gmail.com');
-    const [password, setPassword] = useState('qwe123QWE!@#');
+    const [state, setState] = useState<IState>(initialState)
     const [dialogOpened, setDialogOpened] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [errorForm, setError] = useState(initialState);
 
     const handleLogin = () => {
-        props.action.authorization(email, password)
+        // props.action.authorization(state.email.value, state.password.value)
         handleClose()
     };
 
@@ -54,15 +48,15 @@ export function AuthorizationLogin(props: any) {
         setDialogOpened(false)
     };
 
-    useEffect(() => {
-        if (!errorForm.email.status
-            && !errorForm.password.status
-            && email.trim() && password.trim()) {
-            setIsButtonDisabled(false);
-        } else {
-            setIsButtonDisabled(true);
-        }
-    }, [email, password]);
+    // useEffect(() => {
+    //     if (!errorForm.email.status
+    //         && !errorForm.password.status
+    //         && email.trim() && password.trim()) {
+    //         setIsButtonDisabled(false);
+    //     } else {
+    //         setIsButtonDisabled(true);
+    //     }
+    // }, [email, password]);
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.keyCode === 13 || e.which === 13) {
@@ -78,76 +72,50 @@ export function AuthorizationLogin(props: any) {
     }
     return (
         <>
-            <div>
-                <Typography align={"center"}>
+            <Form>
+                <div style={{textAlign: "center"}}>
                     <strong>Login</strong>
-                </Typography>
-                <TextField
-                    error={errorForm.email.status}
-                    helperText={errorForm.email.message}
-                    variant="outlined"
-                    fullWidth
-                    id="email"
-                    autoFocus
-                    name="email"
-                    type="email"
-                    size={"small"}
-                    label="Email"
-                    placeholder="Email"
-                    margin="normal"
-                    onChange={(e) => handleChange(e, setEmail(e.target.value))}
-                    onKeyPress={(e)=>handleKeyPress(e)}
+                </div>
+                <Form.Group controlId="formLogin">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        type="email"
+                        placeholder="Email"
+                        onChange={(e) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}
+                        onKeyPress={(e: any)=>handleKeyPress(e)}/>
+                    <br />
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => handleChange(e, setState({...state, password: {value: e.target.value, message: '', status: false}}))}
+                        onKeyPress={(e: any)=>handleKeyPress(e)}/>
+                </Form.Group>
+                <Form.Check
+                    type={"checkbox"}
+                    id={`default-checkbox`}
+                    // onClick={handleChange}
+                    label={`Remember me`}
                 />
-                <TextField
-                    error={errorForm.password.status}
-                    helperText={errorForm.password.message}
-                    variant="outlined"
-                    fullWidth
-                    name="password"
-                    id="password"
-                    size={"small"}
-                    type="password"
-                    label="Password"
-                    placeholder="Password"
-                    margin="normal"
-                    onChange={(e) => handleChange(e, setPassword(e.target.value))}
-                    onKeyPress={(e)=>handleKeyPress(e)}
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            // checked={state.checkedB}
-                            onChange={handleChange}
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Remember me"
-                />
-                <FormControl fullWidth  className={classes.action}>
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                        // className={classes.loginBtn}
-                        onClick={handleLogin}
-                        disabled={isButtonDisabled}>
-                        LOGIN
-                    </Button>
-                </FormControl>
-                <Grid container >
-                    <Grid item xs >
-                        <Link href="#" onClick={() => onChangeForm('recovery')} variant="body2">
+                <Button
+                    type="submit"
+                    block
+                    variant={"primary"}
+                    onClick={handleLogin}
+                    disabled={isButtonDisabled}>
+                    LOGIN
+                </Button>
+                <Container>
+                    <Row  >
+                        <a href="#" onClick={() => onChangeForm('recovery')}  >
                             Forgot password?
-                        </Link>
-                    </Grid>
-                    <Grid item>
-                        <Link href="#" onClick={() => onChangeForm('signUp')} variant="body2">
-                            {"Don't have an account? Sign Up"}
-                        </Link>
-                    </Grid>
-                </Grid>
-            </div>
+                        </a>
+                        <a href="#" onClick={() => onChangeForm('signUp')}>
+                            Don't have an account? Sign Up
+                        </a>
+                    </Row>
+                </Container>
+            </Form>
         </>
     )
 }

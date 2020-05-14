@@ -1,29 +1,24 @@
 import React from "react";
-import {Grid, Divider, Box, Hidden} from "@material-ui/core";
 import { AuthorizationRightSide } from "./AuthorizationRightSide";
 import { AuthorizationLeftSide } from "./AuthorizationLeftSide";
-import {useStyles} from "./style";
-
+import {Col, Container, Row} from "react-bootstrap";
 
 export function AuthorizationForm(props: any) {
-    const classes = useStyles()
     const {onHideModal, form} = props;
-
     return (
-        <Grid className={classes.rootForm} container alignItems="center">
-            <div className={classes.leftSide} >
-                <div style={{padding:10}}>
-                    <AuthorizationLeftSide onHideModal={onHideModal}/>
-                </div>
-            </div>
-            <div style={{flexGrow: 1}}></div>
-            <Hidden xsDown><Divider orientation="vertical" flexItem /></Hidden>
-            <div style={{flexGrow: 1}}></div>
-            <div className={classes.rightSide}>
-                <AuthorizationRightSide form={form} onHideModal={onHideModal}/>
-            </div>
-        </Grid>
-
-
+        <Container>
+            <Row >
+                <Col >
+                    <div style={{padding:10 }}>
+                        <AuthorizationLeftSide onHideModal={onHideModal}/>
+                    </div>
+                </Col>
+                <Col >
+                    <div style={{paddingRight:30, paddingLeft:30, borderLeft: '1px solid #c6c6c6', width: 440}}>
+                        <AuthorizationRightSide form={form} onHideModal={onHideModal}/>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     )
 }
