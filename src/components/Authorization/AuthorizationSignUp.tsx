@@ -2,7 +2,34 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import {validateForm} from "../../components/validateForm/validateForm";
 // import {authorizationActionCreator} from "../../store/action/authorization";
 import {connect} from "react-redux";
-import {Form, Button, Container, Row} from "react-bootstrap";
+import {
+    FormControl,
+    Grid,
+    IconButton,
+    Link,
+    InputAdornment,
+    TextField,
+    createStyles,
+    Theme,
+    Typography,
+    Button
+} from "@material-ui/core";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+            action: {
+                marginTop: '10px',
+            },
+            contentText: {
+                marginTop: '8px'
+            }
+
+        }
+    )
+)
+
 
  export interface IState {
      email: {
@@ -28,6 +55,7 @@ import {Form, Button, Container, Row} from "react-bootstrap";
  }
 
 export function AuthorizationSignUp(props: any) {
+    const classes = useStyles()
     const {onChangeForm, onHideModal} = props;
 
     const initialState: IState = {
@@ -60,37 +88,34 @@ export function AuthorizationSignUp(props: any) {
     const [state, setState] = useState<IState>(initialState)
 
     // useEffect(()=>{
-    //     debugger
-    //     if(password === passwordRepeat) {
-    //         setError({...errorForm, passwordRepeat: {status: false, message: ''}});
+    //     if(state.password.value === state.passwordRepeat.value) {
+    //         setState({...state, passwordRepeat: {status: false, message: '', value: state.passwordRepeat.value}});
     //     } else {
-    //         setError({...errorForm, passwordRepeat: {status: true, message: 'Password do not match'}});
+    //         setState({...state, passwordRepeat: {status: true, message: 'Password do not match', value: state.passwordRepeat.value}});
     //     }
-    // },[passwordRepeat, password])
+    // },[state.passwordRepeat, state.password])
 
-    // useEffect(() => {
-    //     let passwordError;
-    //     if(password === passwordRepeat) {
-    //         setError({...errorForm, passwordRepeat: {status: false, message: ''}});
-    //         passwordError = false
-    //     } else {
-    //         setError({...errorForm, passwordRepeat: {status: true, message: 'Password do not match'}});
-    //         passwordError = true
-    //     }
-    //     if (!errorForm.email.status
-    //         && !errorForm.password.status
-    //         && !passwordError
-    //         && !errorForm.username.status
-    //         && !errorForm.email.status
-    //         && username.trim()
-    //         && email.trim()
-    //         && password.trim()
-    //         && passwordRepeat.trim()) {
-    //         setIsButtonDisabled(false);
-    //     } else {
-    //         setIsButtonDisabled(true);
-    //     }
-    // }, [username, password, email, passwordRepeat]);
+    const validateFormSignUp = () => {
+
+    }
+
+    useEffect(() => {
+        const {username, email, password, passwordRepeat} = state
+        let passwordError;
+        if (!errorForm.email.status
+            && !errorForm.password.status
+            && !passwordError
+            && !errorForm.username.status
+            && !errorForm.email.status
+            && username.value.trim()
+            && email.value.trim()
+            && password.value.trim()
+            && passwordRepeat.value.trim()) {
+            setIsButtonDisabled(false);
+        } else {
+            setIsButtonDisabled(true);
+        }
+    }, [state]);
 
     const handleSignUp = () => {
         // props.action.authorization(email, password)
@@ -120,66 +145,125 @@ export function AuthorizationSignUp(props: any) {
     }
     return (
         <>
-            <Form>
-                <div style={{textAlign: "center"}}>
+            <div>
+                <Typography align={"center"}>
                     <strong>Sign Up</strong>
-                </div>
-                <Form.Group controlId="formSignUp">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        data-testid="username"
-                        name="username"
-                        type="text"
-                        placeholder="Username"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, username: {value: e.target.value, message: '', status: false}}))}
-                        onKeyPress={(e: any)=>handleKeyPress(e)}/>
-                    <br />
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        data-testid="email"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}
-                        onKeyPress={(e: any)=>handleKeyPress(e)}/>
-                    <br />
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        data-testid="password"
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, password: {value: e.target.value, message: '', status: false}}))}
-                        onKeyPress={(e: any)=>handleKeyPress(e)}/>
-                    <br />
-                    <Form.Label>Password Repeat</Form.Label>
-                    <Form.Control
-                        data-testid="passwordRepeat"
-                        name="passwordRepeat"
-                        type="password"
-                        placeholder="Password Repeat"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, passwordRepeat: {value: e.target.value, message: '', status: false}}))}
-                        onKeyPress={(e: any)=>handleKeyPress(e)}/>
-                </Form.Group>
-                <Button
-                    type="submit"
-                    block
-                    variant={"primary"}
-                    onClick={handleSignUp}
-                    disabled={isButtonDisabled}>
-                    Sign Up
-                </Button>
-                <Container>
-                    <Row  >
-                        <a href="#" onClick={() => onChangeForm('recovery')}  >
+                </Typography>
+                <TextField
+                    className={classes.contentText}
+                    error={errorForm.username.status}
+                    helperText={errorForm.username.message}
+                    fullWidth
+                    variant="outlined"
+                    id="username"
+                    type="text"
+                    size={"small"}
+                    name="username"
+                    label="Username"
+                    placeholder="Username"
+                    margin="normal"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, username: {value: e.target.value, message: '', status: false}}))}
+                    onKeyPress={(e)=>handleKeyPress(e)}
+                />
+                <TextField
+                    className={classes.contentText}
+                    error={errorForm.email.status}
+                    helperText={errorForm.email.message}
+                    fullWidth
+                    variant="outlined"
+                    id="email"
+                    type="email"
+                    name="email"
+                    size={"small"}
+                    label="Email"
+                    placeholder="Email"
+                    margin="normal"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}
+                    onKeyPress={(e)=>handleKeyPress(e)}
+                />
+                <TextField
+                    className={classes.contentText}
+                    error={errorForm.password.status}
+                    helperText={errorForm.password.message}
+                    fullWidth
+                    variant="outlined"
+                    id="password"
+                    type={passwordVisible ? 'text' : 'password'}
+                    name="password"
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                size={"small"}
+                                edge="end"
+                            >
+                                {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>,
+                    }}
+                    size={"small"}
+                    label="Password"
+                    placeholder="Password"
+                    margin="normal"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, password: {value: e.target.value, message: '', status: false}}))}
+
+                    onKeyPress={(e)=>handleKeyPress(e)}
+                />
+                <TextField
+                    className={classes.contentText}
+                    style={{marginTop: '8px'}}
+                    error={errorForm.passwordRepeat.status}
+                    helperText={errorForm.passwordRepeat.message}
+                    fullWidth
+                    size={"small"}
+                    variant="outlined"
+                    id="passwordRepeat"
+                    type={passwordVisible ? 'text' : 'password'}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                size={"small"}
+                                edge="end"
+                            >
+                                {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>,
+                    }}
+                    name="passwordRepeat"
+                    label="Password Repeat"
+                    placeholder="Repeat Password"
+                    margin="normal"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, passwordRepeat: {value: e.target.value, message: '', status: false}}))}
+                    onKeyPress={(e)=>handleKeyPress(e)}
+                />
+                <FormControl fullWidth className={classes.action}>
+                    <Button
+                        variant="contained"
+                        size="large"
+                        color="primary"
+                        type="button"
+                        // className={classes.signUpBtn}
+                        onClick={handleSignUp}
+                        disabled={isButtonDisabled}>
+                        Sign Up
+                    </Button>
+                </FormControl>
+                <Grid container >
+                    <Grid item xs >
+                        <Link href="#" onClick={() => onChangeForm('recovery')} variant="body2">
                             Forgot password?
-                        </a>
-                        <a href="#" onClick={() => onChangeForm('login')}>
-                            Login
-                        </a>
-                    </Row>
-                </Container>
-            </Form>
+                        </Link>
+                    </Grid>
+                    <Grid item>
+                        <Link href="#" onClick={() => onChangeForm('login')} variant="body2">
+                            {"Login"}
+                        </Link>
+                    </Grid>
+                </Grid>
+            </div>
         </>
     )
 }
