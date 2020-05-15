@@ -1,22 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {validateForm} from "../../components/validateForm/validateForm";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {connect} from "react-redux";
-import Alert from '@material-ui/lab/Alert';
 import {Button, Container, Form, Row} from "react-bootstrap";
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-            action: {
-                marginTop: '10px',
-            },
-            contentText: {
-                marginTop: '8px'
-            }
-
-        }
-    )
-)
 
 export interface IState {
     email: {
@@ -28,8 +14,6 @@ export interface IState {
 
 export function AuthorizationRecoveryPassword(props: any) {
     const {onChangeForm, onHideModal} = props;
-    const classes = useStyles()
-
     const initialState: IState = {
         email: {
             status: false,
@@ -74,15 +58,17 @@ export function AuthorizationRecoveryPassword(props: any) {
     return (
         <>
             <Form>
-                {alertSuccess
-                && <Alert onClose={() => {}}>На вашу почту отправлено письмо для восстановления пароля</Alert>
-                }
+                {/*{alertSuccess*/}
+                {/*&& <Alert onClose={() => {}}>На вашу почту отправлено письмо для восстановления пароля</Alert>*/}
+                {/*}*/}
                 <div style={{textAlign: "center"}}>
                     <strong>Recovery password</strong>
                 </div>
                 <Form.Group controlId="formRecovery">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
+                        data-testid="email"
+                        name="email"
                         type="email"
                         placeholder="Email"
                         onChange={(e) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}

@@ -1,22 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {validateForm} from "../../components/validateForm/validateForm";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 // import {authorizationActionCreator} from "../../store/action/authorization";
 import {connect} from "react-redux";
 import {Form, Button, Container, Row} from "react-bootstrap";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-            action: {
-                marginTop: '10px',
-            },
-            contentText: {
-                marginTop: '8px'
-            }
-
-        }
-    )
-)
 
  export interface IState {
      email: {
@@ -42,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
  }
 
 export function AuthorizationSignUp(props: any) {
-    const classes = useStyles()
     const {onChangeForm, onHideModal} = props;
 
     const initialState: IState = {
@@ -142,30 +127,38 @@ export function AuthorizationSignUp(props: any) {
                 <Form.Group controlId="formSignUp">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
+                        data-testid="username"
+                        name="username"
                         type="text"
                         placeholder="Username"
-                        onChange={(e) => handleChange(e, setState({...state, username: {value: e.target.value, message: '', status: false}}))}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, username: {value: e.target.value, message: '', status: false}}))}
                         onKeyPress={(e: any)=>handleKeyPress(e)}/>
                     <br />
                     <Form.Label>Email</Form.Label>
                     <Form.Control
+                        data-testid="email"
+                        name="email"
                         type="email"
                         placeholder="Email"
-                        onChange={(e) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}
                         onKeyPress={(e: any)=>handleKeyPress(e)}/>
                     <br />
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                        data-testid="password"
+                        name="password"
                         type="password"
                         placeholder="Password"
-                        onChange={(e) => handleChange(e, setState({...state, password: {value: e.target.value, message: '', status: false}}))}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, password: {value: e.target.value, message: '', status: false}}))}
                         onKeyPress={(e: any)=>handleKeyPress(e)}/>
                     <br />
                     <Form.Label>Password Repeat</Form.Label>
                     <Form.Control
+                        data-testid="passwordRepeat"
+                        name="passwordRepeat"
                         type="password"
                         placeholder="Password Repeat"
-                        onChange={(e) => handleChange(e, setState({...state, passwordRepeat: {value: e.target.value, message: '', status: false}}))}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, passwordRepeat: {value: e.target.value, message: '', status: false}}))}
                         onKeyPress={(e: any)=>handleKeyPress(e)}/>
                 </Form.Group>
                 <Button

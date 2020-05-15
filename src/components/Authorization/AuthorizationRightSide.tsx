@@ -18,9 +18,9 @@ export function AuthorizationRightSide(props: any){
     }
     return (
         <>
-            {stateForm.login && <AuthorizationLogin onHideModal={onHideModal} onChangeForm={(name: any) => handleChangeForm(name)} />}
-            {stateForm.signUp && <AuthorizationSignUp onHideModal={onHideModal} onChangeForm={(name: any) => handleChangeForm(name)} />}
-            {stateForm.recovery && <AuthorizationRecoveryPassword onHideModal={onHideModal} onChangeForm={(name: any) => handleChangeForm(name)} />}
+            {stateForm.login && <AuthorizationLogin shouldRemember={false} onHideModal={onHideModal} onChangeForm={(name: string) => handleChangeForm(name)} />}
+            {stateForm.signUp && <AuthorizationSignUp onHideModal={onHideModal} onChangeForm={(name: string) => handleChangeForm(name)} />}
+            {stateForm.recovery && <AuthorizationRecoveryPassword onHideModal={onHideModal} onChangeForm={(name: string) => handleChangeForm(name)} />}
         </>
     )
 }
