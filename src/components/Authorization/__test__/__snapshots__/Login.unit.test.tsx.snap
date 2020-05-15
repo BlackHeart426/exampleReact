@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthorizationLogin/> renders properly 1`] = `
+<Form
+  data-testid="login-form"
+  inline={false}
+>
+  <div>
+    1
+  </div>
+  <div
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <strong>
+      Login
+    </strong>
+  </div>
+  <WithStyles(ForwardRef(TextField))
+    autoFocus={true}
+    error={false}
+    fullWidth={true}
+    helperText=""
+    id="email"
+    label="Email"
+    margin="normal"
+    name="email"
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder="Email"
+    size="small"
+    type="email"
+    value=""
+    variant="outlined"
+  />
+  <FormGroup
+    controlId="formLogin"
+  >
+    <br />
+    <FormLabel
+      column={false}
+      srOnly={false}
+    >
+      Password
+    </FormLabel>
+    <FormControl
+      data-testid="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+      value="1"
+    />
+  </FormGroup>
+  <FormCheck
+    checked={false}
+    data-testid="remember"
+    disabled={false}
+    id="default-checkbox"
+    inline={false}
+    isInvalid={false}
+    isValid={false}
+    label="Remember me"
+    name="remember"
+    onChange={[Function]}
+    title=""
+    type="checkbox"
+  />
+  <Button
+    active={false}
+    block={true}
+    disabled={true}
+    onClick={[Function]}
+    type="submit"
+    variant="primary"
+  >
+    LOGIN
+  </Button>
+  <Container
+    fluid={false}
+  >
+    <Row
+      noGutters={false}
+    >
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Forgot password?
+      </a>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Don't have an account? Sign Up
+      </a>
+    </Row>
+  </Container>
+</Form>
+`;
