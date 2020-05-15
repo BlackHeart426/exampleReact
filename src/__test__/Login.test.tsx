@@ -34,15 +34,15 @@ describe('<AuthorizationLogin/>',  () => {
     //         remember: false
     //     })
     // });
-    test("should allow entering a password", async () => {
-        const onPasswordChange = jest.fn();
-        const { findByTestId } = renderAuthorizationLogin();
-        const username = await findByTestId("password");
-
-        fireEvent.change(username, { target: { value: "password" } });
-
-        expect(onPasswordChange).toHaveBeenCalledWith("password");
-    });
+    // test("should allow entering a password", async () => {
+    //     const onPasswordChange = jest.fn();
+    //     const { findByTestId } = renderAuthorizationLogin();
+    //     const username = await findByTestId("password");
+    //
+    //     fireEvent.change(username, { target: { value: "password" } });
+    //
+    //     expect(onPasswordChange).toHaveBeenCalledWith("password");
+    // });
 
     // const inputEmail = login.find('input[type="email"]')
     // const inputPassword = login.find('input[type="password"]')
