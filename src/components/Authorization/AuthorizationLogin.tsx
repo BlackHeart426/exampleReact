@@ -1,9 +1,13 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {validateForm} from "../../components/validateForm/validateForm";
+import {AnyAction, bindActionCreators, Dispatch} from "redux";
 // import {authorizationActionCreator, authorizationGoogleActionCreator} from "../../store/action/authorization";
 import {connect} from "react-redux";
 import {Form, Button, Container, Col, Row} from "react-bootstrap";
 import {TextField} from "@material-ui/core";
+import IStoreState from "../../store/IStoreState";
+import {signIn} from "../../api/authenticationApi";
+import { signInActionCreator } from "../../actions/authentiocation/interfaceAuthentication/authenticationActions";
 
 export interface IState {
     email: {
@@ -20,14 +24,16 @@ export interface IState {
 
 }
 
-export interface IProps {
+export interface IAuthorizationLoginProps {
+    signIn: (email: string, password: string) => (dispatch: Dispatch<AnyAction>) => Promise<void>
     shouldRemember: boolean;
     onChangeForm: (change: string) => void;
     onHideModal: () => void;
 }
 
-export function AuthorizationLogin(props: IProps) {
-    const {onChangeForm, onHideModal} = props;
+const AuthorizationLogin: React.FC<IAuthorizationLoginProps> = ({
+     onChangeForm, onHideModal, shouldRemember
+ }) => {
 
     const initialState: IState = {
         email: {
@@ -66,6 +72,10 @@ export function AuthorizationLogin(props: IProps) {
         onHideModal()
         setDialogOpened(false)
     };
+
+    useEffect(()=>{
+        setState({...state, shouldRemember: shouldRemember})
+    },[])
 
     useEffect(() => {
         if (state.email.value.trim() && state.password.value.trim()) {
@@ -116,25 +126,8 @@ export function AuthorizationLogin(props: IProps) {
                 onKeyPress={(e)=>handleKeyPress(e)}
             />
             <Form.Group controlId="formLogin">
-                {/*<Form.Control*/}
-                {/*    data-testid="email"*/}
-                {/*    name="email"*/}
-                {/*    type="email"*/}
-                {/*    placeholder="Email"*/}
-                {/*    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, email: {value: e.target.value, message: '', status: false}}))}*/}
-                {/*    // onKeyPress={(e: any)=>handleKeyPress(e)}*/}
-                {/*/>*/}
                 <br />
                 <Form.Label>Password</Form.Label>
-                {/*<input*/}
-                {/*    id={'password'} // изменили на id*/}
-                {/*    type={'password'}*/}
-                {/*    value*/}
-                {/*    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setState({...state, password: {value: e.currentTarget.value, message: '', status: false}}))}*/}
-
-                {/*    placeholder={'Пароль'}*/}
-                {/*    value={state.password.value}*/}
-                {/*/>*/}
                 <Form.Control
                     data-testid="password"
                     name="password"
@@ -179,12 +172,10 @@ export function AuthorizationLogin(props: IProps) {
     )
 }
 
-// function mapDispatchToProps(dispatch: any) {
-//     return {
-//         action: {
-//             // authorization: (email: string, password: string) => dispatch(authorizationActionCreator(email, password, true)),
-//         }
-//     }
-// }
-//
-// export default connect(null, mapDispatchToProps)(AuthorizationLogin)
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+    return {
+        signIn: bindActionCreators((email, password) => signInActionCreator(email, password), dispatch)
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AuthorizationLogin)
