@@ -5,12 +5,13 @@ import {ISignInInProgressAction, ISignInSuccessAction, ISignInFailAction} from "
 import {
     signIn as signInToApi,
 } from "../../../api/authenticationApi";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 export function signInActionCreator(
     email: string,
     password: string
-): (dispatch: Dispatch<AnyAction>) => Promise<void> {
-    return async (dispatch: Dispatch<AnyAction>) => {
+): (dispatch: ThunkDispatch<IStoreState, undefined, ISignInFailAction | ISignInInProgressAction | ISignInSuccessAction>) => Promise<void> {
+    return async (dispatch: ThunkDispatch<IStoreState, undefined, ISignInFailAction | ISignInInProgressAction | ISignInSuccessAction>) => {
         dispatch(signInInProgressActionCreator())
         try {
             await signInToApi(email, password);
