@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 const middlewares = [thunk]
 import configureMockStore from 'redux-mock-store'
 import {API_ROOT} from "../../../../constants/Defaults";
+import {signIn as signInToApi} from "../../../../api/authenticationApi";
 const mockStore = configureMockStore(middlewares)
 
 describe('signInActionCreator', ()=>{
@@ -38,7 +39,7 @@ describe('signInActionCreator', ()=>{
             fetchMock.restore()
         })
 
-        it('creates LOGIN_SIGNIN_SUCCESS when fetching login true', (email: string, password: string)=>{
+        it('creates LOGIN_SIGNIN_SUCCESS when fetching login true', ()=>{
             fetchMock.getOnce(`${API_ROOT}/login`, {
                 headers: {'content_type': 'application/json'},
                 body: { isAuth: true }
@@ -46,8 +47,9 @@ describe('signInActionCreator', ()=>{
 
             const expectedActions = [signInInProgressActionCreator(), signInSuccessActionCreator()]
             const store = mockStore({})
+            // store.dispatch(signInToApi(name, ))
+            expect(store.getActions()).toEqual(expectedActions)
 
-            return store.dispatch(signInActionCreator(email, password))
         })
     })
 })
