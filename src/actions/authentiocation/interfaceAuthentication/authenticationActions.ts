@@ -1,4 +1,3 @@
-import {AnyAction, Dispatch} from "redux";
 import keys from "../../ActionTypeKeys";
 import IStoreState from "../../../store/IStoreState";
 import {ISignInInProgressAction, ISignInSuccessAction, ISignInFailAction} from "./signin";
@@ -22,19 +21,19 @@ export function signInActionCreator(
     }
 }
 
-function signInInProgressActionCreator(): ISignInInProgressAction {
+export function signInInProgressActionCreator(): ISignInInProgressAction {
     return {
         type: keys.SIGNIN_INPROGRESS
     }
 }
 
-function signInSuccessActionCreator(): ISignInSuccessAction {
+export function signInSuccessActionCreator(): ISignInSuccessAction {
     return {
         type: keys.SIGNIN_SUCCESS
     }
 }
 
-function signInFailActionCreator(error: Error): ISignInFailAction {
+export function signInFailActionCreator(error: Error): ISignInFailAction {
     return {
         payload: {
             error
