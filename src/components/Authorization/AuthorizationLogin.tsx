@@ -85,6 +85,14 @@ export const AuthorizationLogin: React.FC<IAuthorizationLoginProps> = ({
         }
     }, [state]);
 
+    useEffect(() => {
+        if (state.email.value.trim() && state.password.value.trim()) {
+            setIsButtonDisabled(false);
+        } else {
+            setIsButtonDisabled(true);
+        }
+    }, []);
+
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.keyCode === 13 || e.which === 13) {
             isButtonDisabled || handleLogin();
