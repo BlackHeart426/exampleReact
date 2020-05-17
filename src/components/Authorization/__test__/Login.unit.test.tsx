@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {AuthorizationLogin, IProps} from "../AuthorizationLogin"
+import {AuthorizationLogin} from "../AuthorizationLogin"
 import { render, fireEvent, waitForElement } from "@testing-library/react";
 import {shallow} from "enzyme";
 
@@ -12,14 +12,14 @@ describe('<AuthorizationLogin/>',  () => {
     const email = 'vas@gmail.com'
     const wrongEmail = 'vascom'
 
-    const login = shallow<Component>(<AuthorizationLogin shouldRemember={false} onChangeForm={(name: string) => mockLogin(name)} onHideModal={mockLogin}/>)
+    const login = shallow<Component>(<AuthorizationLogin shouldRemember={false} onChangeForm={(name: string) => mockLogin(name)} onHideModal={mockLogin} signIn={mockLogin}/>)
 
     it('renders properly', () => {
         expect(login).toMatchSnapshot()
     })
 
     it('render firm with disabled button at initial render', ()=>{
-        expect(login.find('Button').prop('disabled')).toBeTruthy()
+        expect(login.find('[type="submit"]').prop('disabled')).toBeTruthy()
     })
 
     // it('render firm with disabled button at initial render', ()=>{

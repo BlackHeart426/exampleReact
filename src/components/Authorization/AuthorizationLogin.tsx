@@ -31,7 +31,7 @@ export interface IAuthorizationLoginProps {
     onHideModal: () => void;
 }
 
-const AuthorizationLogin: React.FC<IAuthorizationLoginProps> = ({
+export const AuthorizationLogin: React.FC<IAuthorizationLoginProps> = ({
      onChangeForm, onHideModal, shouldRemember
  }) => {
 
