@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-import IStoreState from "../store/IStoreState";
-import isAuthenticated from "./authenticationReducer";
+import authenticationReducer from "./authenticationReducer";
 
-const rootReducer = combineReducers<IStoreState>({
-  isAuthenticated,
+const rootReducer = combineReducers({
+  isAuthenticated: authenticationReducer
 });
 
 export default rootReducer;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {AuthorizationLogin} from "./AuthorizationLogin";
+import AuthorizationLogin from "./AuthorizationLogin";
 import {AuthorizationSignUp} from "./AuthorizationSignUp";
 import {AuthorizationRecoveryPassword} from "./AuthorizationRecoveryPassword";
 
