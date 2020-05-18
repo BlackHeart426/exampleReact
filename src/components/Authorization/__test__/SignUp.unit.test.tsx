@@ -26,7 +26,6 @@ describe('<AuthorizationSignUp/>',  () => {
     })
 
     it('render firm with disabled button at initial render', ()=>{
-        console.log(register.find('[type="button"]').debug())
         expect(register.find('[type="button"]').prop('disabled')).toBeTruthy()
     })
 

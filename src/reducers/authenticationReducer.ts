@@ -13,7 +13,7 @@ export default function authenticationReducer(
     case ActionTypeKeys.SIGNIN_SUCCESS:
       return {...state, isAuthenticated: true, loading: false}
     case ActionTypeKeys.SIGNIN_FAIL:
-      return {...state, isAuthenticated: false, loading: false, error: action.payload}
+      return {...state, isAuthenticated: false, loading: false, error: action.payload.error}
     // case ActionTypeKeys.SIGNOUT_SUCCESS:
     //   return onSignOut();
     default:

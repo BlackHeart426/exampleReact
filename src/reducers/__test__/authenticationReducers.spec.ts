@@ -23,14 +23,14 @@ describe('login reducers',()=>{
         const actionFAIL: ISignInFailAction = {
             type: keys.SIGNIN_FAIL,
             payload: {
-                error: new Error
+                error: {name: 'fail', message: 'server bot available'}
             }
         }
 
         expect(reducer(initialState, actionFAIL)).toEqual({
             ...initialState,
             loading: false,
-            error: 'Error'
+            error: {name: 'fail', message: 'server bot available'}
         })
     })
     it('login_SUCCESS',()=>{
@@ -41,6 +41,7 @@ describe('login reducers',()=>{
         expect(reducer(initialState, actionSUCCESS)).toEqual({
             ...initialState,
             loading: false,
+            isAuthenticated: true
         })
     })
 })
